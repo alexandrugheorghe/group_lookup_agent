@@ -3,11 +3,7 @@
 import { HumanMessage } from "@langchain/core/messages";
 import { NextResponse } from "next/server";
 import { compiledGraph } from "../../../lib/graph/agents";
-import { MemorySaver } from "@langchain/langgraph";
 import { randomUUID } from "crypto";
-
-// Create a single MemorySaver instance to persist state across requests
-const memory = new MemorySaver();
 
 export async function POST(req: Request) {
   try {
@@ -30,11 +26,13 @@ export async function POST(req: Request) {
         ? (body as { threadId: string }).threadId
         : randomUUID();
 
+    console.log("threadId", threadId);
+    
     // Invoke with the new message - LangGraph will load previous state from memory
     // and the reducer will merge the new message with existing messages
     const result = await compiledGraph.invoke(
       { messages: [new HumanMessage(message)] }, 
-      { configurable: { threadId, checkpointer: memory } }
+      { configurable: { thread_id: threadId } }
     );
 
     return NextResponse.json({ 

@@ -43,7 +43,7 @@ env?: Record<string, string | undefined>
 
   
   async Clarifier(
-  userMessages: string[],preferences: string[],
+  conversationMessages: string[],preferences: string[],
   __baml_options__?: BamlCallOptions<never>
   ): Promise<HTTPRequest> {
     try {
@@ -62,7 +62,7 @@ env?: Record<string, string | undefined>
       return await this.runtime.buildRequest(
       "Clarifier",
       {
-      "userMessages": userMessages,"preferences": preferences
+      "conversationMessages": conversationMessages,"preferences": preferences
       },
       this.ctxManager.cloneContext(),
       __baml_options__?.tb?.__tb(),
@@ -142,7 +142,7 @@ env?: Record<string, string | undefined>
       }
       
   async Replier(
-  userMessages: string[],groups: types.Group[],
+  conversationMessages: string[],groups: types.Group[],
   __baml_options__?: BamlCallOptions<never>
   ): Promise<HTTPRequest> {
     try {
@@ -161,7 +161,7 @@ env?: Record<string, string | undefined>
       return await this.runtime.buildRequest(
       "Replier",
       {
-      "userMessages": userMessages,"groups": groups
+      "conversationMessages": conversationMessages,"groups": groups
       },
       this.ctxManager.cloneContext(),
       __baml_options__?.tb?.__tb(),
@@ -181,7 +181,7 @@ env?: Record<string, string | undefined>
 
       
       async Clarifier(
-      userMessages: string[],preferences: string[],
+      conversationMessages: string[],preferences: string[],
       __baml_options__?: BamlCallOptions<never>
       ): Promise<HTTPRequest> {
         try {
@@ -200,7 +200,7 @@ env?: Record<string, string | undefined>
           return await this.runtime.buildRequest(
           "Clarifier",
           {
-          "userMessages": userMessages,"preferences": preferences
+          "conversationMessages": conversationMessages,"preferences": preferences
           },
           this.ctxManager.cloneContext(),
           __baml_options__?.tb?.__tb(),
@@ -280,7 +280,7 @@ env?: Record<string, string | undefined>
           }
           
       async Replier(
-      userMessages: string[],groups: types.Group[],
+      conversationMessages: string[],groups: types.Group[],
       __baml_options__?: BamlCallOptions<never>
       ): Promise<HTTPRequest> {
         try {
@@ -299,7 +299,7 @@ env?: Record<string, string | undefined>
           return await this.runtime.buildRequest(
           "Replier",
           {
-          "userMessages": userMessages,"groups": groups
+          "conversationMessages": conversationMessages,"groups": groups
           },
           this.ctxManager.cloneContext(),
           __baml_options__?.tb?.__tb(),

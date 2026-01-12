@@ -98,7 +98,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
 
         
         async Clarifier(
-        userMessages: string[],preferences: string[],
+        conversationMessages: string[],preferences: string[],
         __baml_options__?: BamlCallOptions<never>
         ): Promise<string> {
           try {
@@ -112,7 +112,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
           // Check if onTick is provided - route through streaming if so
           if (__options__.onTick) {
           const __stream__ = this.stream.Clarifier(
-          userMessages,preferences,
+          conversationMessages,preferences,
           __baml_options__
           );
 
@@ -136,7 +136,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
             const __raw__ = await this.runtime.callFunction(
             "Clarifier",
             {
-            "userMessages": userMessages,"preferences": preferences
+            "conversationMessages": conversationMessages,"preferences": preferences
             },
             this.ctxManager.cloneContext(),
             __options__.tb?.__tb(),
@@ -266,7 +266,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
             }
             
         async Replier(
-        userMessages: string[],groups: types.Group[],
+        conversationMessages: string[],groups: types.Group[],
         __baml_options__?: BamlCallOptions<never>
         ): Promise<types.GroupResponse> {
           try {
@@ -280,7 +280,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
           // Check if onTick is provided - route through streaming if so
           if (__options__.onTick) {
           const __stream__ = this.stream.Replier(
-          userMessages,groups,
+          conversationMessages,groups,
           __baml_options__
           );
 
@@ -304,7 +304,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
             const __raw__ = await this.runtime.callFunction(
             "Replier",
             {
-            "userMessages": userMessages,"groups": groups
+            "conversationMessages": conversationMessages,"groups": groups
             },
             this.ctxManager.cloneContext(),
             __options__.tb?.__tb(),
@@ -336,7 +336,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
 
             
             Clarifier(
-            userMessages: string[],preferences: string[],
+            conversationMessages: string[],preferences: string[],
             __baml_options__?: BamlCallOptions<never>
             ): BamlStream<string, string>
               {
@@ -385,7 +385,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
                 const __raw__ = this.runtime.streamFunction(
                 "Clarifier",
                 {
-                "userMessages": userMessages,"preferences": preferences
+                "conversationMessages": conversationMessages,"preferences": preferences
                 },
                 undefined,
                 this.ctxManager.cloneContext(),
@@ -558,7 +558,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
                   }
                   
             Replier(
-            userMessages: string[],groups: types.Group[],
+            conversationMessages: string[],groups: types.Group[],
             __baml_options__?: BamlCallOptions<never>
             ): BamlStream<partial_types.GroupResponse, types.GroupResponse>
               {
@@ -607,7 +607,7 @@ export type RecursivePartialNull<T> = MovedRecursivePartialNull<T>
                 const __raw__ = this.runtime.streamFunction(
                 "Replier",
                 {
-                "userMessages": userMessages,"groups": groups
+                "conversationMessages": conversationMessages,"groups": groups
                 },
                 undefined,
                 this.ctxManager.cloneContext(),

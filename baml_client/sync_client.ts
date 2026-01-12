@@ -98,7 +98,7 @@ export class BamlSyncClient {
 
   
   Clarifier(
-      userMessages: string[],preferences: string[],
+      conversationMessages: string[],preferences: string[],
       __baml_options__?: BamlCallOptions<never>
   ): string {
     try {
@@ -130,7 +130,7 @@ export class BamlSyncClient {
       const __raw__ = this.runtime.callFunctionSync(
         "Clarifier",
         {
-          "userMessages": userMessages,"preferences": preferences
+          "conversationMessages": conversationMessages,"preferences": preferences
         },
         this.ctxManager.cloneContext(),
         __options__.tb?.__tb(),
@@ -248,7 +248,7 @@ export class BamlSyncClient {
   }
   
   Replier(
-      userMessages: string[],groups: types.Group[],
+      conversationMessages: string[],groups: types.Group[],
       __baml_options__?: BamlCallOptions<never>
   ): types.GroupResponse {
     try {
@@ -280,7 +280,7 @@ export class BamlSyncClient {
       const __raw__ = this.runtime.callFunctionSync(
         "Replier",
         {
-          "userMessages": userMessages,"groups": groups
+          "conversationMessages": conversationMessages,"groups": groups
         },
         this.ctxManager.cloneContext(),
         __options__.tb?.__tb(),

@@ -7,13 +7,13 @@ class GroupResponse {
   message string
 }
 
-function Replier(userMessages: string[], groups: Group[]) -> GroupResponse {
+function Replier(conversationMessages: string[], groups: Group[]) -> GroupResponse {
   client "openai/gpt-4o-mini"
   prompt #"
-    Your purpose is to present to the user chat groups that are most relevant to the user messages.
-    Given the following user messages and found groups, return a message and the groups that are most relevant to the user messages.
+    Your purpose is to present to the user chat groups that are most relevant to the conversation messages.
+    Given the following conversation messages and found groups, return a message and the groups that are most relevant to the conversation messages.
     The generate message should always contain the groups and the description of the groups.
-    User Messages: {{ userMessages }}
+    Conversation messages: {{ conversationMessages }}
     Found groups: {{ groups }}
     {{ ctx.output_format }}
   "#
