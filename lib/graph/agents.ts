@@ -8,7 +8,7 @@ const graph = GroupLookupGraph(GraphState, {
     PreferenceExtractor: async(state) => {
       console.log("In node: PreferenceExtractor")
       const response = await b.PreferenceMatcher(state.messages.map((message) => message.content as string), state.initialPreferences);
-      return { preferences: response.preferences }
+      return { ...state, preferences: response.preferences }
     },
     Replier: async (state) => {
         console.log("In node: Replier", { preferences: state.preferences })
@@ -17,14 +17,15 @@ const graph = GroupLookupGraph(GraphState, {
         const response = await b.Replier(state.messages.map((message) => message.content as string), foundGroups.map((group) => ({ name: group.name, description: group.description })));
         
         return {
-          messages: [new AIMessage(response.message)],
+          ...state,
+          messages: [...state.messages, new AIMessage(response.message)],
           groups: foundGroups,
         } // Add your state update logic here
     },
     Clarifier: async (state) => {
       console.log("In node: Clarifier", { messages: state.messages.length })
       const response = await b.Clarifier(state.messages.map((message) => message.content as string), state.initialPreferences)
-      return { messages: [new AIMessage(response)] }
+      return { ...state,messages: [...state.messages, new AIMessage(response)] }
     },
     IsPreferenceClear: async (state) => {
       console.log("In node: IsPreferenceClear", { preferences: state.preferences.length })

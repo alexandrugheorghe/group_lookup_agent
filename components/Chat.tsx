@@ -19,12 +19,13 @@ export function Chat() {
       id: newId(),
       role: "assistant",
       content:
-        "Hey 👋 I’m Neya. Tell me what groups you're interested in, and I'll try and find a match for you.",
+        "Hey 👋 I'm Neya. Tell me what groups you're interested in, and I'll try and find a match for you.",
     },
   ]);
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [threadId, setThreadId] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
 
   const canSend = useMemo(() => input.trim().length > 0 && !isSending, [input, isSending]);
@@ -44,10 +45,10 @@ export function Chat() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ message: trimmed }),
+        body: JSON.stringify({ message: trimmed, threadId }),
       });
 
-      const data: { reply?: string; error?: string } = await res.json().catch(() => ({}));
+      const data: { reply?: string; error?: string; threadId?: string } = await res.json().catch(() => ({}));
 
       if (!res.ok) {
         throw new Error(data.error || `Request failed (${res.status})`);
@@ -55,6 +56,11 @@ export function Chat() {
 
       const reply = data.reply?.trim();
       if (!reply) throw new Error("Empty reply from server");
+
+      // Store threadId if provided (for new sessions) or keep existing one
+      if (data.threadId) {
+        setThreadId(data.threadId);
+      }
 
       const assistantMsg: ChatMessage = { id: newId(), role: "assistant", content: reply };
       setMessages((prev) => [...prev, assistantMsg]);

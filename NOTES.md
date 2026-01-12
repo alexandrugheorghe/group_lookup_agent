@@ -59,6 +59,10 @@ If you run out of time, use this file to share:
    - Apply diversity filters to avoid showing too many similar groups
    - Group results by category or theme
 
+4. **Replacing similariy search as group retrieval mechanism**
+   - Vector spaces have a maximum storage capacity after which all vectors become equally distant and similarity searches don't yield relevant results
+   - Vector databaase should be replaced with a Graph based database where hierarchical relationships and topics are stored
+
 ### Error Handling & Resilience
 
 1. **Graceful Degradation**
@@ -98,6 +102,7 @@ If you run out of time, use this file to share:
    - Return structured data (group IDs, metadata) along with text response
    - Enable frontend to display groups in cards or list format
    - Include relevance scores and match reasons
+   - Show the user which tags are currently attributed to him/her
 
 2. **Interactive Refinement**
    - Allow users to provide feedback on results

@@ -3,6 +3,12 @@ import type { Group } from "../types";
 import { Message } from "@langchain/core/messages";
 import { allUniqueTags } from "../mockGroups";
 
+function capArrayStart(arr: Array<any>, maxSize: number) {
+  if (arr.length <= maxSize) return arr;
+  return arr.slice(arr.length - maxSize);
+}
+
+
 export const GraphState = Annotation.Root({
   initialPreferences: Annotation<Array<string>>({
     reducer: () => allUniqueTags,
@@ -17,7 +23,7 @@ export const GraphState = Annotation.Root({
     default: () => [],
   }),
   messages: Annotation<Array<Message>>({
-    reducer: (state: Array<Message>, update: Array<Message>) => [...state, ...update],
+    reducer: (state: Array<Message>, update: Array<Message>) => capArrayStart([...state, ...update], 10),
     default: () => [],
   }),
 });

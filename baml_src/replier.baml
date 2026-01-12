@@ -12,6 +12,7 @@ function Replier(userMessages: string[], groups: Group[]) -> GroupResponse {
   prompt #"
     Your purpose is to present to the user chat groups that are most relevant to the user messages.
     Given the following user messages and found groups, return a message and the groups that are most relevant to the user messages.
+    The generate message should always contain the groups and the description of the groups.
     User Messages: {{ userMessages }}
     Found groups: {{ groups }}
     {{ ctx.output_format }}
