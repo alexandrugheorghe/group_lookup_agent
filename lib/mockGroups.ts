@@ -444,4 +444,6 @@ export const MOCK_GROUPS: Group[] = [
   },
 ];
 
+export const allUniqueTags = [...new Set(MOCK_GROUPS.flatMap((group) => group.tags))];
+
 

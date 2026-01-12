@@ -1,5 +1,8 @@
+'use server';
+
+import { HumanMessage } from "@langchain/core/messages";
 import { NextResponse } from "next/server";
-import { runAgent } from "../../../lib/agent";
+import { compiledGraph } from "../../../lib/graph/agents";
 
 export async function POST(req: Request) {
   try {
@@ -16,9 +19,9 @@ export async function POST(req: Request) {
       );
     }
 
-    const result = await runAgent({ message });
+    const result = await compiledGraph.invoke({ messages: [new HumanMessage(message)] });
 
-    return NextResponse.json({ reply: result.reply }, { status: 200 });
+    return NextResponse.json({ reply: result.messages[result.messages.length - 1].content }, { status: 200 });
   } catch (e) {
     const msg = e instanceof Error ? e.message : "Unknown error";
     return NextResponse.json({ error: msg }, { status: 500 });
