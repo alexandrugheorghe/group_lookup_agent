@@ -98,7 +98,7 @@ export async function searchGroups(
   text: string,
   options: SearchOptions = {}
 ): Promise<SearchResult[]> {
-  const { limit = 10, scoreThreshold = 0.5 } = options;
+  const { limit = 10, scoreThreshold = 0.1 } = options;
 
   try {
     const client = getQdrantClient();
@@ -137,6 +137,7 @@ export async function searchGroups(
       filter,
       with_payload: true,
     });
+    console.log("searchResults", searchResults);
 
     // Convert Qdrant results to Group objects
     const results: SearchResult[] = searchResults

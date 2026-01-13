@@ -22,6 +22,7 @@
 
 # embedding cache
 /local_cache
+/.embeddings.cache.json
 # misc
 .DS_Store
 *.pem

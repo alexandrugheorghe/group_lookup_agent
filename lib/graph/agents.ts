@@ -2,7 +2,7 @@ import { AIMessage } from "@langchain/core/messages";
 import { GroupLookupGraph } from "./graph"
 import { GraphState } from "./state";
 import { b } from '../../baml_client/async_client'
-import { searchGroupsByTags } from "../search";
+import { searchGroups } from "../search";
 import { MemorySaver } from "@langchain/langgraph";
 
 const memory = new MemorySaver();
@@ -15,8 +15,9 @@ const graph = GroupLookupGraph(GraphState, {
     },
     Replier: async (state) => {
         console.log("In node: Replier", { preferences: state.preferences })
-        const foundGroups = await searchGroupsByTags(state.preferences);
-
+        const results = await searchGroups(state.preferences, state.messages[state.messages.length - 1].content as string);
+        const foundGroups = results.map((result) => result.group);
+        
         const response = await b.Replier(state.messages.map((message) => message.content as string), foundGroups.map((group) => ({ name: group.name, description: group.description })));
         
         return {
